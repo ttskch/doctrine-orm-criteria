@@ -9,6 +9,8 @@ use Doctrine\ORM\QueryBuilder;
 
 trait JoinTrait
 {
+    use AddSelectTrait;
+
     /**
      * @param Expr\Join::ON|Expr\Join::WITH|null $conditionType
      *
@@ -19,7 +21,7 @@ trait JoinTrait
         if (!$this->isAlreadyJoined($qb, $alias)) {
             $qb->join($join, $alias, $conditionType, $condition, $indexBy);
             if ($addSelect) {
-                $qb->addSelect($alias);
+                $this->addSelect($qb, $alias);
             }
         }
     }

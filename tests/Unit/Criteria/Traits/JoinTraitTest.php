@@ -32,6 +32,7 @@ class JoinTraitTest extends TestCase
         }
 
         if ($addedSelect !== null) {
+            $qb->getDQLPart('select')->willReturn([]);
             $qb->addSelect($addedSelect)->shouldBeCalledTimes(1);
         } else {
             $qb->addSelect(Argument::cetera())->shouldNotBeCalled();
@@ -59,6 +60,7 @@ class JoinTraitTest extends TestCase
         }
 
         if ($addedSelect !== null) {
+            $qb->getDQLPart('select')->willReturn([]);
             $qb->addSelect($addedSelect)->shouldBeCalledTimes(1);
         } else {
             $qb->addSelect(Argument::cetera())->shouldNotBeCalled();
@@ -86,6 +88,7 @@ class JoinTraitTest extends TestCase
         }
 
         if ($addedSelect !== null) {
+            $qb->getDQLPart('select')->willReturn([]);
             $qb->addSelect($addedSelect)->shouldBeCalledTimes(1);
         } else {
             $qb->addSelect(Argument::cetera())->shouldNotBeCalled();
