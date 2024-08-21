@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "doctrine/orm": "^2"
+        "doctrine/orm": "^2.8"
     },
     "require-dev": {
         "ext-pcov": "*",
