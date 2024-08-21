@@ -15,12 +15,14 @@
     "require-dev": {
         "ext-pcov": "*",
         "bamarni/composer-bin-plugin": "^1.8",
+        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
             "Ttskch\\DoctrineOrmCriteria\\": "src/"
-        }
+        },
+        "files": ["lib/functions.php"]
     },
     "autoload-dev": {
         "psr-4": {

@@ -1,9 +1,10 @@
 includes:
-    - vendor-bin/tools/vendor/phpstan/phpstan-strict-rules/rules.neon
-    - vendor-bin/tools/vendor/jangregor/phpstan-prophecy/extension.neon
+  - vendor-bin/tools/vendor/phpstan/phpstan-strict-rules/rules.neon
+  - vendor-bin/tools/vendor/jangregor/phpstan-prophecy/extension.neon
 
 parameters:
   level: max
   paths:
+    - lib
     - src
     - tests
