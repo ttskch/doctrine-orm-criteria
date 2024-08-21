@@ -14,4 +14,26 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Ttskch\DoctrineOrmCriteria\Criteria\Andx" />
+                <referencedClass name="Ttskch\DoctrineOrmCriteria\Criteria\OrderBy" />
+                <referencedClass name="Ttskch\DoctrineOrmCriteria\Criteria\Orx" />
+                <referencedClass name="Ttskch\DoctrineOrmCriteria\Exception\LogicException" />
+                <referencedClass name="Ttskch\DoctrineOrmCriteria\Exception\RuntimeException" />
+                <referencedClass name="Ttskch\DoctrineOrmCriteria\Repository\CriteriaAwareRepositoryInterface" />
+            </errorLevel>
+        </UnusedClass>
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwareness::__construct" />
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwareness::addCriteria" />
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwareness::getQueryBuilder" />
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\Criteria\Composite::__construct" />
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\Criteria\OrderBy::__construct" />
+            </errorLevel>
+        </PossiblyUnusedMethod>
+    </issueHandlers>
 </psalm>
