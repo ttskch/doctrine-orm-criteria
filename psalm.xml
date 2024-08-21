@@ -28,6 +28,8 @@
         </UnusedClass>
         <PossiblyUnusedMethod>
             <errorLevel type="suppress">
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwarenessInterface::addCriteria" />
+                <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwarenessInterface::getQueryBuilder" />
                 <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwareness::__construct" />
                 <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwareness::addCriteria" />
                 <referencedMethod name="Ttskch\DoctrineOrmCriteria\CriteriaAwareness::getQueryBuilder" />
