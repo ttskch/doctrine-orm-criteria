@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.0, 8.1, 8.2, 8.3]
+        prefer-lowest: [false, true]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pcov
+
+      - uses: actions/checkout@v4
+
+      - name: Get Composer cache directory path
+        id: composer-cache-dir-path
+        run: echo "path=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache-dir-path.outputs.path }}
+          key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
+
+      - name: Install Composer dependencies
+        if: ${{ !matrix.prefer-lowest }}
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Install lowest Composer dependencies
+        if: ${{ matrix.prefer-lowest }}
+        run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --prefer-lowest
+
+      - name: Install composer-bin-plugin dependencies
+        if: ${{ matrix.php == '8.3' && !matrix.prefer-lowest }}
+        run: composer bin all install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Execute tests in latest environment
+        if: ${{ matrix.php == '8.3' && !matrix.prefer-lowest }}
+        run: composer tests
+
+      - name: Execute tests for backward compatibility
+        if: ${{ matrix.php != '8.3' || matrix.prefer-lowest }}
+        run: composer tests:bc
+
+      - name: Generate coverage report
+        if: ${{ matrix.php == '8.3' && !matrix.prefer-lowest }}
+        run: composer pcov
+
+      - name: Upload coverage report to Codecov
+        if: ${{ matrix.php == '8.3' && !matrix.prefer-lowest }}
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: build/coverage.xml
+          verbose: true
