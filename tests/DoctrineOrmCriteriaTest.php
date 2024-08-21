@@ -18,6 +18,6 @@ class DoctrineOrmCriteriaTest extends TestCase
     public function testIsInstanceOfDoctrineOrmCriteria(): void
     {
         $actual = $this->doctrineOrmCriteria;
-        $this->assertInstanceOf(DoctrineOrmCriteria::class, $actual);
+        self::assertInstanceOf(DoctrineOrmCriteria::class, $actual);
     }
 }
