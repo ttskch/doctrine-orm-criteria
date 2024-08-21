@@ -68,6 +68,25 @@ class CriteriaAwareRepositoryTraitTest extends TestCase
         $actual = $SUT->findOneByCriteria([$criteria->reveal()], ['field' => 'ASC']);
         self::assertSame($object, $actual);
     }
+
+    public function testCountByCriteria(): void
+    {
+        $qb = $this->prophesize(QueryBuilder::class);
+        $qb->getRootAliases()->willReturn(['entity']);
+
+        $query = $this->prophesize(Query::class);
+        $query->getSingleScalarResult()->willReturn(10);
+        $qb->select('count(entity.id)')->willReturn($qb->reveal());
+        $qb->getQuery()->willReturn($query->reveal());
+
+        $SUT = new CriteriaAwareRepositoryImpl($qb->reveal());
+
+        $criteria = $this->prophesize(CriteriaInterface::class);
+        $criteria->apply($qb, 'entity')->shouldBeCalledTimes(1);
+
+        $actual = $SUT->countByCriteria([$criteria->reveal()]);
+        self::assertSame(10, $actual);
+    }
 }
 
 class CriteriaAwareRepositoryImpl
