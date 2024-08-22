@@ -1,6 +1,7 @@
 {
     "name": "ttskch/doctrine-orm-criteria",
-    "description": "",
+    "description": "Doctrine ORM Criteria allows you to separate any complex \"search condition\" as a Criteria with a specialized API for QueryBuilder of doctrine/orm.",
+    "keywords": ["doctrine", "doctrine-orm", "criteria", "symfony"],
     "license": "MIT",
     "authors": [
         {
