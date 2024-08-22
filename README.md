@@ -154,7 +154,7 @@ final readonly class IsViewable implements CriteriaInterface
             new Orx([
                 new IsPublic($this->at),
                 ...array_map(fn (string $category) => new CategoryIs($category), Foo::PUBLIC_CATEGORIES),
-            ])
+            ]),
             new IsAccessibleBy($this->me),
         ]))->apply($qb, $alias);
     }
@@ -231,7 +231,7 @@ You can also easily integrate with your repositories using [`CriteriaAwareReposi
 ```
 
 ```php
-$foos = $fooRepository->createQueryBuilder('f')->findByCriteria([
+$foos = $fooRepository->findByCriteria([
     new IsPublic(),
     new IsAccessibleBy($user),
     new CategoryIs($category),
@@ -240,7 +240,7 @@ $foos = $fooRepository->createQueryBuilder('f')->findByCriteria([
 
 \PHPStan\dumpType($foos); // Dumped type: array<App\Entity\Foo>
 
-$foo = $fooRepository->createQueryBuilder('f')->findOneByCriteria([
+$foo = $fooRepository->findOneByCriteria([
     new IsPublic(),
     new IsAccessibleBy($user),
     new CategoryIs($category),
@@ -249,7 +249,7 @@ $foo = $fooRepository->createQueryBuilder('f')->findOneByCriteria([
 
 \PHPStan\dumpType($foo); // Dumped type: App\Entity\Foo
 
-$count = $fooRepository->createQueryBuilder('f')->countByCriteria([
+$count = $fooRepository->countByCriteria([
     new IsPublic(),
     new IsAccessibleBy($user),
     new CategoryIs($category),
