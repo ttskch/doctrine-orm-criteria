@@ -2,8 +2,8 @@
 
 [![](https://github.com/ttskch/doctrine-orm-criteria/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/ttskch/doctrine-orm-criteria/actions/workflows/ci.yaml?query=branch:main)
 [![codecov](https://codecov.io/gh/ttskch/doctrine-orm-criteria/graph/badge.svg?token=gu1GDphBHg)](https://codecov.io/gh/ttskch/doctrine-orm-criteria)
-[![Latest Stable Version](https://poser.pugx.org/ttskch/doctrine-orm-criteria/version?format=flat-square)](https://packagist.org/packages/ttskch/doctrine-orm-criteria)
-[![Total Downloads](https://poser.pugx.org/ttskch/doctrine-orm-criteria/downloads?format=flat-square)](https://packagist.org/packages/ttskch/doctrine-orm-criteria/stats)
+[![Latest Stable Version](https://poser.pugx.org/ttskch/doctrine-orm-criteria/v)](https://packagist.org/packages/ttskch/doctrine-orm-criteria)
+[![Total Downloads](https://poser.pugx.org/ttskch/doctrine-orm-criteria/downloads)](https://packagist.org/packages/ttskch/doctrine-orm-criteria/stats)
 
 ## Introduction
 
