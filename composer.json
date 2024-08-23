@@ -70,7 +70,9 @@
             "@sa",
             "@pcov",
             "@metrics"
-        ]
+        ],
+        "post-install-cmd": "@composer bin all install --ansi",
+        "post-update-cmd": "@composer bin all update --ansi"
     },
     "scripts-descriptions": {
         "test": "Run unit tests",
