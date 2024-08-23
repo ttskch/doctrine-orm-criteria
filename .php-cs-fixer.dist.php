@@ -1,6 +1,7 @@
 <?php
 
 $finder = (new PhpCsFixer\Finder())
+    ->in('lib')
     ->in('src')
     ->in('tests')
 ;
