@@ -257,7 +257,7 @@ $foo = $fooRepository->findOneByCriteria([
     new OrderByRandom(),
 ]);
 
-\PHPStan\dumpType($foo); // Dumped type: App\Entity\Foo
+\PHPStan\dumpType($foo); // Dumped type: App\Entity\Foo|null
 
 $count = $fooRepository->countByCriteria([
     new IsPublic(),
