@@ -21,6 +21,16 @@ $qb = (new CriteriaAwareness($fooRepository->createQueryBuilder('f')))
     ->addCriteria(new OrderByRandom(), 'f')
     ->getQueryBuilder()
 ;
+$foos = $qb->getQuery()->getResult();
+
+// Or, using the Repository integration:
+
+$foos = $fooRepository->findByCriteria([
+    new IsPublic(),
+    new IsAccessibleBy($user),
+    new CategoryIs($category),
+    new OrderByRandom(),
+]);
 ```
 
 ```php
