@@ -5,7 +5,7 @@
 [![Latest Stable Version](https://poser.pugx.org/ttskch/doctrine-orm-criteria/v)](https://packagist.org/packages/ttskch/doctrine-orm-criteria)
 [![Total Downloads](https://poser.pugx.org/ttskch/doctrine-orm-criteria/downloads)](https://packagist.org/packages/ttskch/doctrine-orm-criteria/stats)
 
-## Introduction
+## Motivation
 
 [`QueryBuilder`](https://www.doctrine-project.org/projects/doctrine-orm/en/2.20/reference/query-builder.html) of [doctrine/orm](https://www.doctrine-project.org/projects/doctrine-orm/en/2.20/index.html) has a method called [`addCriteria()`](https://www.doctrine-project.org/projects/doctrine-orm/en/2.20/reference/query-builder.html#adding-a-criteria-to-a-query) that allows you to build queries by combining [`Criteria`](https://www.doctrine-project.org/projects/doctrine-orm/en/2.20/reference/working-with-associations.html#filtering-collections) of [doctrine/collections](https://www.doctrine-project.org/projects/doctrine-collections/en/stable/index.html). This allows you to separate the concerns of "search conditions" into a `Criteria`, improving the maintainability of your codebase.
 
