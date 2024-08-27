@@ -272,7 +272,6 @@ $count = $fooRepository->countByCriteria([
 
 ```shell
 $ composer install
-$ composer bin all install
 
 # Develop...
 
