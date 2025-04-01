@@ -6,37 +6,35 @@ namespace Ttskch\DoctrineOrmCriteria\Unit\Criteria\Traits;
 
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Ttskch\DoctrineOrmCriteria\Criteria\Traits\AddSelectTrait;
 
 class AddSelectTraitTest extends TestCase
 {
-    use ProphecyTrait;
-
     /**
      * @dataProvider addSelectDataProvider
      */
+    #[DataProvider('addSelectDataProvider')]
     public function testAddSelect(?string $existentSelect, string $select, ?string $alias, bool $hidden, ?string $addedSelect): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
-        $qb->getDQLPart('select')->willReturn($existentSelect !== null ? [new Expr\Select([$existentSelect])] : []);
+        $qb = $this->createMock(QueryBuilder::class);
+        $qb->method('getDQLPart')->with('select')->willReturn($existentSelect !== null ? [new Expr\Select([$existentSelect])] : []);
         if ($addedSelect !== null) {
-            $qb->addSelect($addedSelect)->shouldBeCalledTimes(1);
+            $qb->expects($this->once())->method('addSelect')->with($addedSelect);
         } else {
-            $qb->addSelect(Argument::cetera())->shouldNotBeCalled();
+            $qb->expects($this->never())->method('addSelect');
         }
 
         $SUT = new AddSelectImpl();
 
-        $SUT->addSelect($qb->reveal(), $select, $alias, $hidden);
+        $SUT->addSelect($qb, $select, $alias, $hidden);
     }
 
     /**
      * @return array<mixed>
      */
-    public function addSelectDataProvider(): array
+    public static function addSelectDataProvider(): array
     {
         return [
             [null, 'entity.field', null, false, 'entity.field'],

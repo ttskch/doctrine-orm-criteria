@@ -6,33 +6,30 @@ namespace Ttskch\DoctrineOrmCriteria\Unit;
 
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Ttskch\DoctrineOrmCriteria\Criteria\CriteriaInterface;
 use Ttskch\DoctrineOrmCriteria\CriteriaAwareness;
 
 class CriteriaAwarenessTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testAddCriteria(): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
+        $qb = self::createStub(QueryBuilder::class);
 
-        $SUT = new CriteriaAwareness($qb->reveal());
+        $SUT = new CriteriaAwareness($qb);
 
-        $criteria = $this->prophesize(CriteriaInterface::class);
-        $criteria->apply($qb, 'alias')->shouldBeCalledTimes(1);
+        $criteria = $this->createMock(CriteriaInterface::class);
+        $criteria->expects($this->once())->method('apply')->with($qb, 'alias');
 
-        $actual = $SUT->addCriteria($criteria->reveal(), 'alias');
+        $actual = $SUT->addCriteria($criteria, 'alias');
         self::assertSame($SUT, $actual);
     }
 
     public function testGetQueryBuilder(): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
+        $qb = self::createStub(QueryBuilder::class);
 
-        $SUT = new CriteriaAwareness($qb->reveal());
+        $SUT = new CriteriaAwareness($qb);
 
-        self::assertSame($qb->reveal(), $SUT->getQueryBuilder());
+        self::assertSame($qb, $SUT->getQueryBuilder());
     }
 }

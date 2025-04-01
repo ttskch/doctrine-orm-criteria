@@ -1,14 +1,13 @@
 {
     "require-dev": {
-        "doctrine/coding-standard": "^11.0",
-        "phpmd/phpmd": "^2.13",
-        "phpmetrics/phpmetrics": "^2.8",
+        "doctrine/coding-standard": "^13.0",
+        "phpmd/phpmd": "^2.15",
+        "phpmetrics/phpmetrics": "^3.0@rc",
         "phpstan/phpstan": "^1.9",
-        "psalm/plugin-phpunit": "^0.18.4",
-        "vimeo/psalm": "^5.4",
-        "friendsofphp/php-cs-fixer": "^3.62",
-        "phpstan/phpstan-strict-rules": "^1.6",
-        "jangregor/phpstan-prophecy": "^1.0"
+        "psalm/plugin-phpunit": "^0.19",
+        "vimeo/psalm": "^6.10",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan-strict-rules": "^1.6"
     },
     "config": {
         "allow-plugins": {

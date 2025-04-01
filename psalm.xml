@@ -37,5 +37,6 @@
                 <referencedMethod name="Ttskch\DoctrineOrmCriteria\Criteria\OrderBy::__construct" />
             </errorLevel>
         </PossiblyUnusedMethod>
+        <MissingOverrideAttribute errorLevel="suppress" />
     </issueHandlers>
 </psalm>
