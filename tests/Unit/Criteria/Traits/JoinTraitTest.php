@@ -35,7 +35,7 @@ class JoinTraitTest extends TestCase
                 ->with(self::callback(function (string $arg1) {
                     static $i = 0;
 
-                    return match ($i++) {
+                    return match ($i++) { // @phpstan-ignore postInc.type
                         0 => $arg1 === 'join',
                         1 => $arg1 === 'select',
                         default => throw new \LogicException(),
@@ -77,7 +77,7 @@ class JoinTraitTest extends TestCase
                 ->with(self::callback(function (string $arg1) {
                     static $i = 0;
 
-                    return match ($i++) {
+                    return match ($i++) { // @phpstan-ignore postInc.type
                         0 => $arg1 === 'join',
                         1 => $arg1 === 'select',
                         default => throw new \LogicException(),
@@ -119,7 +119,7 @@ class JoinTraitTest extends TestCase
                 ->with(self::callback(function (string $arg1) {
                     static $i = 0;
 
-                    return match ($i++) {
+                    return match ($i++) { // @phpstan-ignore postInc.type
                         0 => $arg1 === 'join',
                         1 => $arg1 === 'select',
                         default => throw new \LogicException(),

@@ -22,7 +22,7 @@ trait AddSelectTrait
     private function isAlreadyAddedToSelect(QueryBuilder $qb, string $select, ?string $alias): bool
     {
         $selectDqlPart = $qb->getDQLPart('select');
-        assert(is_array($selectDqlPart));
+        assert(is_iterable($selectDqlPart));
 
         foreach ($selectDqlPart as $selectExpr) {
             assert($selectExpr instanceof Expr\Select);

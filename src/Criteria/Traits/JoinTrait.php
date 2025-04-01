@@ -59,9 +59,10 @@ trait JoinTrait
     private function isAlreadyJoined(QueryBuilder $qb, string $alias): bool
     {
         $joinDqlPart = $qb->getDQLPart('join');
-        assert(is_array($joinDqlPart));
+        assert(is_iterable($joinDqlPart));
 
         foreach ($joinDqlPart as $joins) {
+            assert(is_iterable($joins));
             foreach ($joins as $joinExpr) {
                 assert($joinExpr instanceof Expr\Join);
                 if ($joinExpr->getAlias() === $alias) {
