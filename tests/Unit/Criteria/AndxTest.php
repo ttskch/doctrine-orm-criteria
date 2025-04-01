@@ -37,7 +37,7 @@ class AndxTest extends TestCase
         $criteria->expects($this->exactly(2))->method('apply')->with(self::callback(function (QueryBuilder $arg1) use ($qb) {
             static $i = 0;
 
-            return match ($i++) {
+            return match ($i++) { // @phpstan-ignore postInc.type
                 0 => $arg1 !== $qb,
                 1 => $arg1 === $qb,
                 default => throw new \LogicException(),

@@ -3,11 +3,11 @@
         "doctrine/coding-standard": "^13.0",
         "phpmd/phpmd": "^2.15",
         "phpmetrics/phpmetrics": "^3.0@rc",
-        "phpstan/phpstan": "^1.9",
+        "phpstan/phpstan": "^2.1",
         "psalm/plugin-phpunit": "^0.19",
         "vimeo/psalm": "^6.10",
         "friendsofphp/php-cs-fixer": "^3.75",
-        "phpstan/phpstan-strict-rules": "^1.6"
+        "phpstan/phpstan-strict-rules": "^2.0"
     },
     "config": {
         "allow-plugins": {
