@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Ttskch\DoctrineOrmCriteria\Exception;
 
-class RuntimeException extends \RuntimeException
+final class RuntimeException extends \RuntimeException
 {
 }

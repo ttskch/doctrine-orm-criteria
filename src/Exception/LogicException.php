@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Ttskch\DoctrineOrmCriteria\Exception;
 
-class LogicException extends \LogicException
+final class LogicException extends \LogicException
 {
 }

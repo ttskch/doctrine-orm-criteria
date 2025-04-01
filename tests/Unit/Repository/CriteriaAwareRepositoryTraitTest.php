@@ -7,84 +7,81 @@ namespace Ttskch\DoctrineOrmCriteria\Unit\Repository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Ttskch\DoctrineOrmCriteria\Criteria\CriteriaInterface;
 use Ttskch\DoctrineOrmCriteria\Repository\CriteriaAwareRepositoryTrait;
 
 class CriteriaAwareRepositoryTraitTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testCreateQueryBuilderByCriteria(): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
-        $qb->addOrderBy('entity.field', 'ASC')->shouldBeCalledTimes(1);
-        $qb->setMaxResults(10)->shouldBeCalledTimes(1);
-        $qb->setFirstResult(20)->shouldBeCalledTimes(1);
+        $qb = $this->createMock(QueryBuilder::class);
+        $qb->expects($this->once())->method('addOrderBy')->with('entity.field', 'ASC');
+        $qb->expects($this->once())->method('setMaxResults')->with(10);
+        $qb->expects($this->once())->method('setFirstResult')->with(20);
 
-        $SUT = new CriteriaAwareRepositoryImpl($qb->reveal());
+        $SUT = new CriteriaAwareRepositoryImpl($qb);
 
-        $criteria = $this->prophesize(CriteriaInterface::class);
-        $criteria->apply($qb, 'entity')->shouldBeCalledTimes(1);
+        $criteria = $this->createMock(CriteriaInterface::class);
+        $criteria->expects($this->once())->method('apply')->with($qb, 'entity');
 
-        $actual = $SUT->createQueryBuilderByCriteria([$criteria->reveal()], ['field' => 'ASC'], 10, 20);
-        self::assertSame($qb->reveal(), $actual);
+        $actual = $SUT->createQueryBuilderByCriteria([$criteria], ['field' => 'ASC'], 10, 20);
+        self::assertSame($qb, $actual);
     }
 
     public function testFindByCriteria(): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
-        $qb->addOrderBy('entity.field', 'ASC')->shouldBeCalledTimes(1);
-        $qb->setMaxResults(10)->shouldBeCalledTimes(1);
-        $qb->setFirstResult(20)->shouldBeCalledTimes(1);
+        $qb = $this->createMock(QueryBuilder::class);
+        $qb->expects($this->once())->method('addOrderBy')->with('entity.field', 'ASC');
+        $qb->expects($this->once())->method('setMaxResults')->with(10);
+        $qb->expects($this->once())->method('setFirstResult')->with(20);
 
-        $query = $this->prophesize(Query::class);
-        $query->getResult()->willReturn([$object = new \stdClass()]);
-        $qb->getQuery()->willReturn($query->reveal());
+        $query = self::createStub(Query::class);
+        $query->method('getResult')->willReturn([$object = new \stdClass()]);
+        $qb->method('getQuery')->willReturn($query);
 
-        $SUT = new CriteriaAwareRepositoryImpl($qb->reveal());
+        $SUT = new CriteriaAwareRepositoryImpl($qb);
 
-        $criteria = $this->prophesize(CriteriaInterface::class);
-        $criteria->apply($qb, 'entity')->shouldBeCalledTimes(1);
+        $criteria = $this->createMock(CriteriaInterface::class);
+        $criteria->expects($this->once())->method('apply')->with($qb, 'entity');
 
-        $actual = $SUT->findByCriteria([$criteria->reveal()], ['field' => 'ASC'], 10, 20);
+        $actual = $SUT->findByCriteria([$criteria], ['field' => 'ASC'], 10, 20);
         self::assertSame([$object], $actual);
     }
 
     public function testFindOneByCriteria(): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
-        $qb->addOrderBy('entity.field', 'ASC')->shouldBeCalledTimes(1);
+        $qb = $this->createMock(QueryBuilder::class);
+        $qb->expects($this->once())->method('addOrderBy')->with('entity.field', 'ASC');
 
-        $query = $this->prophesize(Query::class);
-        $query->getOneOrNullResult()->willReturn($object = new \stdClass());
-        $qb->getQuery()->willReturn($query->reveal());
+        $query = self::createStub(Query::class);
+        $query->method('getOneOrNullResult')->willReturn($object = new \stdClass());
+        $qb->method('getQuery')->willReturn($query);
 
-        $SUT = new CriteriaAwareRepositoryImpl($qb->reveal());
+        $SUT = new CriteriaAwareRepositoryImpl($qb);
 
-        $criteria = $this->prophesize(CriteriaInterface::class);
-        $criteria->apply($qb, 'entity')->shouldBeCalledTimes(1);
+        $criteria = $this->createMock(CriteriaInterface::class);
+        $criteria->expects($this->once())->method('apply')->with($qb, 'entity');
 
-        $actual = $SUT->findOneByCriteria([$criteria->reveal()], ['field' => 'ASC']);
+        $actual = $SUT->findOneByCriteria([$criteria], ['field' => 'ASC']);
         self::assertSame($object, $actual);
     }
 
     public function testCountByCriteria(): void
     {
-        $qb = $this->prophesize(QueryBuilder::class);
-        $qb->getRootAliases()->willReturn(['entity']);
+        $qb = self::createStub(QueryBuilder::class);
+        $qb->method('getRootAliases')->willReturn(['entity']);
 
-        $query = $this->prophesize(Query::class);
-        $query->getSingleScalarResult()->willReturn(10);
-        $qb->select('count(entity.id)')->willReturn($qb->reveal());
-        $qb->getQuery()->willReturn($query->reveal());
+        $query = self::createStub(Query::class);
+        $query->method('getSingleScalarResult')->willReturn(10);
+        $qb->method('select')->with('count(entity.id)')->willReturn($qb);
+        $qb->method('getQuery')->willReturn($query);
 
-        $SUT = new CriteriaAwareRepositoryImpl($qb->reveal());
+        $SUT = new CriteriaAwareRepositoryImpl($qb);
 
-        $criteria = $this->prophesize(CriteriaInterface::class);
-        $criteria->apply($qb, 'entity')->shouldBeCalledTimes(1);
+        $criteria = $this->createMock(CriteriaInterface::class);
+        $criteria->expects($this->once())->method('apply')->with($qb, 'entity');
 
-        $actual = $SUT->countByCriteria([$criteria->reveal()]);
+        $actual = $SUT->countByCriteria([$criteria]);
         self::assertSame(10, $actual);
     }
 }
