@@ -67,9 +67,7 @@ final readonly class IsPublic implements CriteriaInterface
 ## Requirements
 
 * PHP: ^8.1
-* Doctrine ORM: ^2.8
-
-> Support for Doctrine ORM v3 is coming soon.
+* Doctrine ORM: ^2.8|^3.0
 
 ## Installation
 
