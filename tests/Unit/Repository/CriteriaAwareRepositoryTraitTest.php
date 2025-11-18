@@ -52,6 +52,7 @@ class CriteriaAwareRepositoryTraitTest extends TestCase
     {
         $qb = $this->createMock(QueryBuilder::class);
         $qb->expects($this->once())->method('addOrderBy')->with('entity.field', 'ASC');
+        $qb->expects($this->once())->method('setMaxResults')->with(1);
 
         $query = self::createStub(Query::class);
         $query->method('getOneOrNullResult')->willReturn($object = new \stdClass());

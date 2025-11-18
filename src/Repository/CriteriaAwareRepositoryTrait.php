@@ -68,7 +68,7 @@ trait CriteriaAwareRepositoryTrait
      */
     public function findOneByCriteria(array $criteria, array $orderBy = []): ?object
     {
-        $qb = $this->createQueryBuilderByCriteria($criteria, $orderBy);
+        $qb = $this->createQueryBuilderByCriteria($criteria, $orderBy, 1);
 
         /** @var ?T $entity */
         $entity = $qb->getQuery()->getOneOrNullResult();
